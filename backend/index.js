@@ -85,7 +85,7 @@ app.get("/api/tasks/:userId", async (req, res) => {
   }
 });
 
-app.get("/api/tasks/:userId", async (req, res) => {
+/*app.get("/api/tasks/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
     const user = await User.findById(req.params.userId).populate("books");
@@ -99,9 +99,9 @@ app.get("/api/tasks/:userId", async (req, res) => {
     console.error("Error fetching books:", error);
     res.status(500).json({ message: "Server error" });
   }
-});
+});*/
 
-app.post("/api/tasks/:userId", async (req, res) => {
+/*app.post("/api/tasks/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
     const newTask = req.body;
@@ -121,7 +121,36 @@ app.post("/api/tasks/:userId", async (req, res) => {
     console.error("Error adding books:", error);
     res.status(500).json({ message: "Server error" });
   }
+});*/
+
+app.post("/api/tasks/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const newTask = {
+      taskName: req.body.taskName, // Expecting a string
+      taskDescription: req.body.taskDescription, // Expecting a string
+      taskDeadline: req.body.taskDeadline, // Expecting a string
+      taskSubject: req.body.taskSubject, // Expecting a string
+      dateCreated: new Date(), // Add a dateCreated field
+    };
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $push: { tasks: newTask } },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(201).json(updatedUser); // Optionally return updated user data
+  } catch (error) {
+    console.error("Error adding task:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
+
 app.listen(3000, () => {
   connectDB();
   console.log("Server is running");

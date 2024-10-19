@@ -13,6 +13,8 @@ interface Task {
   taskName: string;
   taskDescription: string;
   taskDeadline: string;
+  taskSubject: string;
+  dateCreated: string;
 }
 
 interface UserData {

@@ -5,7 +5,7 @@ import Login from "./Login";
 import { User } from "./types";
 
 function App() {
-  const [task, setTask] = useState("");
+  const [tasks, setTasks] = useState("");
   const [response, setResponse] = useState("");
   const [user, setUser] = useState<User | null>(null);
 
@@ -16,31 +16,31 @@ function App() {
   async function callOpenAIAPI() {
     console.log("Calling OpenAI API");
 
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $OPENAI_API_KEY" \
+    //-H "Content-Type: application/json" \
+    //-H "Authorization: Bearer $OPENAI_API_KEY" \
 
-  const APIBody = {
-    "model": "gpt-4o",
-    "prompt": "Given these tasks and their descriptions, return a list ranking each task from highest to least priority. " + tasks,
-    "temperature": 0.7,
-    "max_tokens": 64,
-    "top_p": 1
-  }
-
-  await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + REACT_APP_OPENAI_API_KEY
+    const APIBody = {
+      "model": "gpt-4o",
+      "prompt": "Given these tasks and their descriptions, return a list ranking each task from highest to least priority. " + tasks,
+      "temperature": 0.7,
+      "max_tokens": 64,
+      "top_p": 1
     }
-    body: JSON.stringify(APIBody)
-  }).then((data) => {
-    return data.json();
-  }).then((data) => {
-    console.log(data);
-    setResponse(data.choices[0].text.trim());
-  });
-  }
+
+    await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + REACT_APP_OPENAI_API_KEY
+      }
+      body: JSON.stringify(APIBody)
+      }).then((data) => {
+      return data.json();
+      }).then((data) => {
+      console.log(data);
+      setResponse(data.choices[0].text.trim());
+    });
+  }//function
 
   console.log(task);
 
@@ -50,15 +50,17 @@ function App() {
       <Login onLogin={handleLogin}></Login>
       <Input></Input>
       <div className="App">
+        // <div>
+        //   <textarea
+        //     onChange={(e) => setTask(e.target.value)}
+        //     placeholder="Add a task to the list"
+        //     cols={50}
+        //     rows={5}
+        // </div>
         <div>
-          <textarea
-            onChange={(e) => setTask(e.target.value)}
-            placeholder="Add a task to the list"
-            cols={50}
-            rows={5}
-        </div>
-        <div>
-          <button onClick={callOpenAIAPI}>Add to list</button>
+          <button onClick={() => {
+            setTask(e.target.value)
+          }}>Wrap taks</button>
           {response != "" ?
             <h3>Response to task: {response}</h3>
             :
@@ -73,6 +75,7 @@ function App() {
 export default App;*/
 
 // App.tsx
+
 import React, { useState } from "react";
 import {
   BrowserRouter as Router,
