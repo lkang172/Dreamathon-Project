@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema(
         taskName: [String],
         taskDescription: [String],
         taskDeadline: [String],
+        taskSubject: [String],
         dateCreated: {
           type: Date,
           default: Date.now,
