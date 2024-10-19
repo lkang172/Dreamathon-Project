@@ -23,18 +23,6 @@ const Input: React.FC<InputProps> = ({ user }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    /*try {
-      const response = await getAIResponse(description);
-
-      setAiResponse(response);
-
-      await storeResponseInDB(description, response);
-
-      console.log("AI Response Stored in DB");
-    } catch (error) {
-      console.log("Failed to Interact with AI");
-    }*/
-
     try {
       const response = await fetch(
         `http://localhost:3000/api/tasks/${user._id}`,
@@ -49,6 +37,10 @@ const Input: React.FC<InputProps> = ({ user }) => {
           }),
         }
       );
+      setTaskName("");
+      setDescription("");
+      setDeadline("");
+      setSubject("");
     } catch (error) {
       console.error("Error", error);
     }
@@ -56,7 +48,7 @@ const Input: React.FC<InputProps> = ({ user }) => {
 
   return (
     <div className="input-container">
-      <h1>Tasks</h1>
+      <h1>Add a Task</h1>
       <form onSubmit={handleSubmit}>
         <div className="input-wrapper">
           <label htmlFor="taskName">Task:</label>
@@ -66,8 +58,8 @@ const Input: React.FC<InputProps> = ({ user }) => {
             name="taskName"
             required
             placeholder="e.g. Java Homework 6"
-            // value={taskName}
-            // onChange={(e) => setTaskName(e.target.value)}
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
           />
         </div>
         <div className="input-wrapper">
@@ -78,8 +70,8 @@ const Input: React.FC<InputProps> = ({ user }) => {
             name="description"
             required
             placeholder="e.g. Create an animal class"
-            // value={description}
-            // onChange={(e) => setDescription(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
         <div className="input-wrapper">
@@ -90,33 +82,26 @@ const Input: React.FC<InputProps> = ({ user }) => {
             name="deadline"
             required
             placeholder="e.g. 6"
-            //value={deadline}
-            // onChange={(e) => setDeadline(e.target.value)}
+            value={deadline}
+            onChange={(e) => setDeadline(e.target.value)}
           />
         </div>
         <div className="input-wrapper">
-          <label htmlFor="subject">Days until due</label>
+          <label htmlFor="subject">Subject</label>
           <input
             type="text"
             id="subject"
             name="subject"
             required
             placeholder="e.g. Math"
-            // value={subject}
-            // onChange={(e) => setSubject(e.target.value)}
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
           />
         </div>
         <button className="button" type="submit">
           Add
         </button>
       </form>
-
-      {/* {aiResponse && (
-        <div className="ai-response">
-          <h2>AI Response:</h2>
-          <p>{aiResponse}</p>
-        </div>
-      )} */}
     </div>
   );
 };

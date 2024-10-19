@@ -18,11 +18,36 @@ body {
   background-color: white;
 }
 
+.input-container::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 200px;
+  height: 200px;
+  background-color: var(--secondary-color);
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.input-container::after {
+  content: "";
+  position: absolute;
+  bottom: -100px;
+  right: -100px;
+  width: 200px;
+  height: 200px;
+  background-color: var(--tertiary-color);
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
 .input-container {
-  width: 100%;
+  width: 40%;
   min-height: 550px;
   margin: 0 auto;
-  margin-top: 90px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   padding: 40px;
   background-color: white;
   border-radius: 15px;
@@ -53,7 +78,6 @@ form {
   align-items: center;
   width: 100%;
   max-width: 800px;
-  margin-bottom: 20px;
 }
 
 label {
@@ -89,7 +113,7 @@ input::placeholder {
 
 .button {
   position: absolute;
-  bottom: 50px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   padding: 16px 24px;
@@ -213,6 +237,8 @@ input::placeholder {
 .loginInput-container {
   margin: 0 auto;
   margin-top: 30px;
+  margin-bottom: 30px;
+  width: 40%;
   padding: 40px;
   background-color: white;
   border-radius: 15px;
