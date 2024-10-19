@@ -90,72 +90,71 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
     //-H "Authorization: Bearer $OPENAI_API_KEY" \
 
     const APIBody = {
-      "model": "gpt-4o",
-      "prompt": "Given these tasks and their descriptions, return a JSON file sorted from highest to least priority. " + tasks,
-      "temperature": 0.7,
-      "max_tokens": 64,
-      "top_p": 1
-    }
+      model: "gpt-4o",
+      prompt:
+        "Given these tasks and their descriptions, return a JSON file sorted from highest to least priority. " +
+        tasks,
+      temperature: 0.7,
+      max_tokens: 64,
+      top_p: 1,
+    };
 
     await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + REACT_APP_OPENAI_API_KEY
-      }
-      body: JSON.stringify(APIBody)
-      }).then((data) => {
-      return data.json();
-      }).then((data) => {
-      console.log(data);
-      setResponse(data.choices[0].text.trim());
-    });
-  }//function
-
+        Authorization: "Bearer " + process.env.REACT_APP_OPENAI_API_KEY,
+      },
+      body: JSON.stringify(APIBody),
+    })
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setResponse(data.choices[0].text.trim());
+      });
+  } //function
 
   return (
     <>
-<div className="profile-container">
-      <div className="profile-info">
-        <img
-          src="https://media.istockphoto.com/id/1471399411/vector/genie-vector-logo.jpg?s=612x612&w=0&k=20&c=s2yLmHyX1f3O8cOy2iRMdaZ_Horu80TArq6ajHmzJ-g="
-          alt={userData.name || "User"}
-          className="profile-photo"
-        />
-        <h1 className="profile-name">Welcome, {userData.username}</h1>
-        <p className="profile-username">@{userData.username}</p>
-        <p className="profile-bio">Good luck!</p>
-      </div>
-      <div className="books-container">
-        <h2 className="books-title">My Tasks:</h2>
-        <div className="book-list">
-          {tasks.map((task, index) => (
-            <div key={index} className="book-item">
-              <h3 className="book-title">{task.taskName}</h3>
-              <h3 className="book-title">{task.taskDescription}</h3>
-              <p className="book-date">Created on: 10/19/2024</p>
-
-              <button className="input-button">Mark as Done</button>
-            </div>
-          ))}
+      <div className="profile-container">
+        <div className="profile-info">
+          <img
+            src="https://media.istockphoto.com/id/1471399411/vector/genie-vector-logo.jpg?s=612x612&w=0&k=20&c=s2yLmHyX1f3O8cOy2iRMdaZ_Horu80TArq6ajHmzJ-g="
+            alt={userData.name || "User"}
+            className="profile-photo"
+          />
+          <h1 className="profile-name">Welcome, {userData.username}</h1>
+          <p className="profile-username">@{userData.username}</p>
+          <p className="profile-bio">Good luck!</p>
         </div>
-      </div>
-    </div>
+        <div className="books-container">
+          <h2 className="books-title">My Tasks:</h2>
+          <div className="book-list">
+            {tasks.map((task, index) => (
+              <div key={index} className="book-item">
+                <h3 className="book-title">{task.taskName}</h3>
+                <h3 className="book-title">{task.taskDescription}</h3>
+                <p className="book-date">Created on: 10/19/2024</p>
+
+                <button className="input-button">Mark as Done</button>
+              </div>
+            ))}
+          </div>
+        </div>
         <div>
-          <button onClick={() => {
-            setTask(e.target.value)
-            callOpenAIAPI();
-          }}>Wrap task</button>
-          {response != "" ?
-            <h3>Response to task: {response}</h3>
-            :
-            null
-          }
+          <button
+            onClick={() => {
+              callOpenAIAPI();
+            }}
+          >
+            Wrap task
+          </button>
+          {response != "" ? <h3>Response to task: {response}</h3> : null}
         </div>
       </div>
     </>
-
-    
   );
 };
 
