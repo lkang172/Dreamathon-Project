@@ -14,12 +14,7 @@ const Navbar = () => {
           <Link className="nav-link" to="/input">
             ADD TASK
           </Link>
-          <Link
-            to="/profile"
-            className="nav-link btn btn-outline-success btn-profile"
-            type="submit"
-            style={{ marginLeft: 10 }}
-          >
+          <Link to="/profile" className="nav-link">
             PROFILE
           </Link>
         </a>
