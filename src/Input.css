@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+:root {
+  --primary-color: #8a4fff;
+  --secondary-color: #00e6c3;
+  --tertiary-color: #ff9f1c;
+  --accent-color: #ff4365;
+  --background-color: #f0e6ff;
+  --text-color: #2d1e2f;
+  --light-gray: #e9ecef;
+  --dark-gray: #6c757d;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: white;
+}
+
+.input-container {
+  width: 100%;
+  min-height: 550px;
+  margin: 0 auto;
+  margin-top: 90px;
+  padding: 40px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(138, 79, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  z-index: 3;
+}
+
+h1 {
+  text-align: center;
+  color: black;
+  font-size: 2.5em;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+label {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 1.2em;
+  align-self: flex-start;
+}
+
+input {
+  padding: 15px;
+  margin-bottom: 30px;
+  border: 2px solid var(--light-gray);
+  border-radius: 8px;
+  font-size: 1.1em;
+  background-color: var(--light-gray);
+  color: var(--text-color);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(138, 79, 255, 0.2);
+}
+
+input::placeholder {
+  color: var(--dark-gray);
+}
+
+.button {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 16px 24px;
+  width: 200px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  cursor: pointer;
+}
+
+.loginbutton {
+  left: 50%;
+  padding: 16px 24px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  cursor: pointer;
+}
+
+.loginbutton:hover {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+.button:hover {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.button:active {
+  transform: translateX(-50%) scale(0.98);
+}
+
+.success-message {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.alert {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+.suse {
+  font-family: "SUSE", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.input-container::before {
+  content: "";
+  position: absolute;
+  background-color: var(--secondary-color);
+  border-radius: 50%;
+  opacity: 0.1;
+  width: auto;
+}
+
+.input-container::after {
+  content: "";
+  position: absolute;
+  background-color: var(--tertiary-color);
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.loginInput-container::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 200px;
+  height: 200px;
+  background-color: var(--secondary-color);
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.loginInput-container::after {
+  content: "";
+  position: absolute;
+  bottom: -100px;
+  right: -100px;
+  width: 200px;
+  height: 200px;
+  background-color: var(--tertiary-color);
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.loginInput {
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 2px solid var(--light-gray);
+  border-radius: 8px;
+  font-size: 1.1em;
+  background-color: var(--light-gray);
+  color: var(--text-color);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.loginInput:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(138, 79, 255, 0.2);
+}
+
+.loginInput::placeholder {
+  color: var(--dark-gray);
+}
+
+.loginInput-container {
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 40px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(138, 79, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.error {
+  color: black;
+  font-size: 15px;
+}
