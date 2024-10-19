@@ -1,5 +1,6 @@
 import express from "express";
 import User from "./User.model.js";
+import Task from "./Task.model.js";
 import dotenv from "dotenv";
 import cors from "cors";
 import { connectDB } from "./db.js";
@@ -86,43 +87,21 @@ app.get("/api/tasks/:userId", async (req, res) => {
   }
 });
 
-/*app.get("/api/tasks/:userId", async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const user = await User.findById(req.params.userId).populate("books");
+app.delete("/api/tasks/:id", async (req, res) => {
+  const { id } = req.params;
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+  try {
+    const deletedTask = await Task.findByIdAndDelete(id);
+    if (!deletedTask) {
+      return res.status(404).json({ message: "Task not found" });
     }
-    res.json(user.books);
-    console.log("Tasks fetched");
+    res.status(200).json({ message: "Task deleted successfully" });
   } catch (error) {
-    console.error("Error fetching books:", error);
-    res.status(500).json({ message: "Server error" });
-  }
-});*/
-
-/*app.post("/api/tasks/:userId", async (req, res) => {
-  try {
-    const userId = req.params.userId;
-    const newTask = req.body;
-
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { $push: { tasks: newTask } },
-      { new: true }
-    );
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
-    }
     res
-      .status(201)
-      .json({ message: "Task added successfully", tasks: updatedUser.tasks });
-  } catch (error) {
-    console.error("Error adding books:", error);
-    res.status(500).json({ message: "Server error" });
+      .status(500)
+      .json({ message: "Error deleting task", error: error.message });
   }
-});*/
+});
 
 app.post("/api/tasks/:userId", async (req, res) => {
   try {

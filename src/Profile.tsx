@@ -62,9 +62,9 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
         );
         if (!booksResponse.ok)
           throw new Error(`HTTP Error! Status: ${booksResponse.status}`);
-        const booksData = await booksResponse.json();
-        console.log("Books data:", booksData);
-        setTasks(booksData);
+        const tasksData = await booksResponse.json();
+        console.log("Books data:", tasksData);
+        setTasks(tasksData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -76,6 +76,28 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
   if (!userData) {
     return <div>Loading...</div>;
   }
+
+  const deleteTask = async (taskId: string) => {
+    if (!window.confirm("Are you sure you want to delete this task?")) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/tasks/${taskId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok)
+        throw new Error(`Error deleting task: ${response.status}`);
+
+      // Filter out the deleted task from the current state
+      alert("Task deleted successfully");
+    } catch (error) {
+      console.error("Error deleting task:", error);
+      alert("Error deleting task");
+    }
+  };
 
   return (
     <div className="profile-container">
@@ -89,16 +111,31 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
         <p className="profile-username">@{userData.username}</p>
         <p className="profile-bio">Good luck!</p>
       </div>
-      <div className="books-container">
+      <div className="tasks-container">
         <h2 className="books-title">My Tasks:</h2>
         <div className="book-list">
           {tasks.map((task, index) => (
             <div key={index} className="book-item">
-              <h3 className="book-title">{task.taskName}</h3>
-              <h3 className="book-title">{task.taskDescription}</h3>
-              <p className="book-date">Created on: 10/19/2024</p>
+              <h3 className="task-title">{task.taskName}</h3>
+              <p className="task-text">
+                <strong>Description: </strong>
+                {task.taskDescription}
+              </p>
+              <p className="task-text">
+                <strong>Subject: </strong>
+                {task.taskSubject}
+              </p>
+              <p className="task-text">
+                <strong>Due in: </strong>
+                {task.taskDeadline} days
+              </p>
 
-              <button className="input-button">Mark as Done</button>
+              <button
+                className="input-button"
+                onClick={() => deleteTask(task._id)}
+              >
+                Mark as Done
+              </button>
             </div>
           ))}
         </div>
