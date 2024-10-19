@@ -5,13 +5,7 @@ import Login from "./Login";
 import { User } from "./types";
 
 function App() {
-  const [tasks, setTasks] = useState("");
   const [response, setResponse] = useState("");
-  const [user, setUser] = useState<User | null>(null);
-
-  const handleLogin = (userData: User) => {
-    setUser(userData);
-  };
 
   async function callOpenAIAPI() {
     console.log("Calling OpenAI API");
