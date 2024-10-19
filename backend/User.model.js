@@ -14,10 +14,10 @@ const UserSchema = new mongoose.Schema(
     },
     tasks: [
       {
-        taskName: [String],
-        taskDescription: [String],
-        taskDeadline: [String],
-        taskSubject: [String],
+        taskName: String,
+        taskDescription: String,
+        taskDeadline: String,
+        taskSubject: String,
         dateCreated: {
           type: Date,
           default: Date.now,

@@ -73,6 +73,7 @@ app.get("/api/user/:userId", async (req, res) => {
 app.get("/api/tasks/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
+    console.log(`Fetching tasks for user ID: ${userId}`); // Debugging
     const user = await User.findById(req.params.userId).populate("tasks");
 
     if (!user) {

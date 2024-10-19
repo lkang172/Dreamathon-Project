@@ -21,7 +21,7 @@ function App() {
 
     const APIBody = {
       "model": "gpt-4o",
-      "prompt": "Given these tasks and their descriptions, return a list ranking each task from highest to least priority. " + tasks,
+      "prompt": "Given these tasks and their descriptions, return a JSON file sorted from highest to least priority. " + tasks,
       "temperature": 0.7,
       "max_tokens": 64,
       "top_p": 1
@@ -60,7 +60,8 @@ function App() {
         <div>
           <button onClick={() => {
             setTask(e.target.value)
-          }}>Wrap taks</button>
+            callOpenAIAPI();
+          }}>Wrap task</button>
           {response != "" ?
             <h3>Response to task: {response}</h3>
             :

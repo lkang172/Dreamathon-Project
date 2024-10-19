@@ -55,6 +55,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
         const data = await response.json();
         console.log("User data:", data);
         setUserData(data);
+        setTasks(data.tasks);
 
         const booksResponse = await fetch(
           `http://localhost:3000/api/tasks/${user._id}`
@@ -93,18 +94,11 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
         <div className="book-list">
           {tasks.map((task, index) => (
             <div key={index} className="book-item">
-              <img
-                src="https://images.pond5.com/magic-wiccan-old-book-cover-illustration-238909602_iconl_nowm.jpeg"
-                alt={`Book ${task.taskName}`}
-                className="book-cover"
-              />
+              <h3 className="book-title">{task.taskName}</h3>
               <h3 className="book-title">{task.taskDescription}</h3>
-              <p className="book-date">
-                Created on:{" "}
-                {new Date(task.taskDeadline).toISOString().split("T")[0]}
-              </p>
+              <p className="book-date">Created on: 10/19/2024</p>
 
-              <button className="input-button">Open</button>
+              <button className="input-button">Mark as Done</button>
             </div>
           ))}
         </div>
