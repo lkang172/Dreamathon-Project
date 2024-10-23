@@ -1,3 +1,3 @@
 ## Simplifi
-The ultimate task management tool.
+The ultimate task management tool. `\n`
 https://docs.google.com/presentation/d/1wPDxPnmClTaMzcQ6ZbPQKFd62EmLxwpIJdV7IhDqXOE/edit?usp=sharing
